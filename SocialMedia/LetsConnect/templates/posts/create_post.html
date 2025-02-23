@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    /* Back Button Styling */
+    .back-button {
+        position: fixed;  /* Fixed position to always be visible */
+        top: 50px;  
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: #ffffff;
+        border: 2px solid #78c2ad; /* Blue border */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #026045;
+        font-size: 24px;
+        font-weight: bold;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s ease;
+        z-index: 1000; /* Ensures it stays above all elements */
+    }
+
+    .back-button:hover {
+        background-color: #026045;
+        color: #ffffff;
+    }
+</style>
+
+<body>
+
+<!-- Back Button -->
+<a href="{% url 'post_list' %}" class="back-button">
+    <i class="bi bi-arrow-left"></i>
+</a>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Create New Post</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Enter post title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <textarea name="content" id="content" class="form-control" rows="5" placeholder="Write your post content here..."></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select name="category" id="category" class="form-control">
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-check-circle"></i> Create Post
+                        </button>
+                        <a href="{% url 'post_list' %}" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

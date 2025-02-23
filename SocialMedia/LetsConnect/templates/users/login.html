@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+/* Dark Themed Login Form */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #1e1e1e; /* Darker background for better contrast */
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6); /* Stronger shadow for depth */
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Title */
+.login-container h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #026045;
+}
+
+/* Input Fields */
+.login-container input {
+    background-color: #2b2b2b;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Placeholder Text */
+.login-container input::placeholder {
+    color: #bbb;
+}
+
+/* Focus State */
+.login-container input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Login Button */
+.login-container .btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #78c2ad;
+    border: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.login-container .btn-primary:hover {
+    background-color: #026045;
+}
+
+/* Forgot Password & Register Links */
+.login-links {
+    margin-top: 15px;
+}
+
+.login-links a {
+    color: #78c2ad;
+    text-decoration: none;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+</style>
+<div class="container">
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" id="username" class="form-control" placeholder="Enter username">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <div class="login-links"> | 
+            <a href="{% url 'register' %}">Create an Account</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

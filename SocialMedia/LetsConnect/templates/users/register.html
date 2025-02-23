@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    /* Dark Themed Register Form */
+    .register-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #1e1e1e; /* Dark background for consistency */
+        border-radius: 10px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6); /* Stronger shadow for depth */
+        color: #ffffff;
+        text-align: center;
+    }
+    
+    /* Title */
+    .register-container h2 {
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #026045; /* Green shade for branding */
+    }
+    
+    /* Input Fields */
+    .register-container input {
+        background-color: #2b2b2b;
+        color: #fff;
+        border: 1px solid #555;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    /* Placeholder Text */
+    .register-container input::placeholder {
+        color: #bbb;
+    }
+    
+    /* Focus State */
+    .register-container input:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+    
+    /* Register Button */
+    .register-container .btn-primary {
+        width: 100%;
+        padding: 10px;
+        background-color: #78c2ad;
+        border: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    
+    .register-container .btn-primary:hover {
+        background-color: #026045;
+    }
+    
+    /* Login Link */
+    .register-links {
+        margin-top: 15px;
+    }
+    
+    .register-links a {
+        color: #78c2ad;
+        text-decoration: none;
+    }
+    
+    .register-links a:hover {
+        text-decoration: underline;
+    }
+    
+    </style>
+    
+    <div class="container">
+        <div class="register-container">
+            <h2>Register</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+            <div class="register-links">
+                <a href="{% url 'login' %}">Already have an account? Login</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
