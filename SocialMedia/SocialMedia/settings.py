@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'LetsConnect',
 ]
 
@@ -48,7 +52,40 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': os.getenv('GOOGLE_CLIENT_ID'),  #create yours one from google console developers api services
+            'secret': os.getenv('GOOGLE_CLIENT_SECRET'),
+            'key': ''
+        }
+    }
+}
+
+LOGIN_REDIRECT_URL = 'create_post'
+LOGOUT_REDIRECT_URL = '/'
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_LOGIN_METHOD = {"email"}
+ACCOUNT_USERNAME_REQUIRED = False
+SOCIALACCOUNT_ADAPTER = "LetsConnect.adapters.MySocialAccountAdapter"
+
+SOCIALACCOUNT_AUTO_SIGNUP = True  # Auto signup without extra steps
+ACCOUNT_SIGNUP_REDIRECT_URL = 'create_post'  # Redirect after signup
+LOGIN_REDIRECT_URL = 'create_post'  # Redirect after login
+
+
 
 ROOT_URLCONF = 'SocialMedia.urls'
 
@@ -70,6 +107,17 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+]
+
 
 WSGI_APPLICATION = 'SocialMedia.wsgi.application'
 
