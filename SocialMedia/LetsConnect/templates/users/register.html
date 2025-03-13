@@ -71,6 +71,7 @@
     
     </style>
     
+    {% load socialaccount %}
     <div class="container">
         <div class="register-container">
             <h2>Register</h2>
@@ -81,6 +82,10 @@
             </form>
             <div class="register-links">
                 <a href="{% url 'login' %}">Already have an account? Login</a>
+            </div><br>
+            <p><strong>OR</strong></p>
+            <div class="register-links">
+                <a href="{% provider_login_url 'google' %}">Singup with Google</a>
             </div>
         </div>
     </div>

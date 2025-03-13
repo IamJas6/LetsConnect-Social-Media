@@ -22,6 +22,7 @@ from LetsConnect import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.post_list, name='post_list'),
+    path('accounts/', include('allauth.urls')),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),

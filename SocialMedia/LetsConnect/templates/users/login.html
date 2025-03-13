@@ -70,6 +70,7 @@
 }
 
 </style>
+{% load socialaccount %}
 <div class="container">
     <div class="login-container">
         <h2>Login</h2>
@@ -85,8 +86,12 @@
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
-        <div class="login-links"> | 
+        <div class="login-links">
             <a href="{% url 'register' %}">Create an Account</a>
+        </div><br>
+        <p><strong>OR</strong></p>
+        <div class="login-links"> 
+            <a href="{% provider_login_url 'google' %}">Login with Google</a>
         </div>
     </div>
 </div>
